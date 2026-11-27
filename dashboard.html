@@ -28,6 +28,7 @@
 <style>
 :root {
   --bg: #ffffff;
+  --field: #f1f3ee;
   --surface: #ffffff;
   --ink: #121411;
   --ink-muted: #6b7266;
@@ -311,7 +312,7 @@ main::-webkit-scrollbar { display: none; }
   width: 40px; height: 40px;
   border-radius: 50%;
   display: grid; place-items: center;
-  background: var(--bg);
+  background: var(--field);
   color: var(--ink);
   font-size: 16px;
   transition: background .2s ease;
@@ -366,7 +367,7 @@ main::-webkit-scrollbar { display: none; }
   right: 8px; top: 50%; transform: translateY(-50%);
   width: 34px; height: 34px;
   border-radius: 50%;
-  background: var(--bg);
+  background: var(--field);
   color: var(--ink);
   display: none;
   place-items: center;
@@ -485,7 +486,7 @@ main::-webkit-scrollbar { display: none; }
 .li-icon {
   width: 48px; height: 48px;
   border-radius: var(--radius-sm);
-  background: var(--bg);
+  background: var(--field);
   color: var(--ink);
   display: grid; place-items: center;
   font-size: 14px;
@@ -510,7 +511,7 @@ main::-webkit-scrollbar { display: none; }
 /* Quantity Control */
 .qty-control {
   display: flex; align-items: center; gap: 10px;
-  background: var(--bg);
+  background: var(--field);
   padding: 4px;
   border-radius: var(--radius-full);
   border: 1px solid var(--border);
@@ -615,7 +616,7 @@ nav {
 .form-input {
   width: 100%;
   padding: 16px;
-  background: var(--bg);
+  background: var(--field);
   border: 1.5px solid transparent;
   border-radius: var(--radius-sm);
   font-size: 15px; font-weight: 600; color: var(--ink);
@@ -670,7 +671,7 @@ input[type="date"].form-input { color: var(--ink); font-family: inherit; }
   padding: 14px 10px;
   border-radius: var(--radius-sm);
   border: 1.5px solid var(--border);
-  background: var(--bg);
+  background: var(--field);
   color: var(--ink);
   font-weight: 800;
   font-size: 13px;
@@ -722,7 +723,7 @@ input[type="date"].form-input { color: var(--ink); font-family: inherit; }
 .num-quick button {
   padding: 7px 11px;
   border-radius: 10px;
-  background: var(--bg);
+  background: var(--field);
   color: var(--ink);
   border: 1px solid var(--border);
   font-size: 12px;
@@ -769,7 +770,7 @@ input[type="date"].form-input { color: var(--ink); font-family: inherit; }
 .chart-meta { font-size: 11px; font-weight: 700; color: var(--ink-muted); }
 .bars { display: flex; align-items: flex-end; justify-content: space-between; height: 140px; gap: 12px; }
 .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; height: 100%; justify-content: flex-end; }
-.bar-track { width: 100%; height: 100%; background: var(--bg); border-radius: 8px; position: relative; overflow: hidden; }
+.bar-track { width: 100%; height: 100%; background: var(--field); border-radius: 8px; position: relative; overflow: hidden; }
 .bar-fill {
   position: absolute; bottom: 0; width: 100%;
   background: var(--lime);
@@ -790,7 +791,7 @@ input[type="date"].form-input { color: var(--ink); font-family: inherit; }
   align-items: center;
   gap: 6px;
   padding: 14px 8px;
-  background: var(--bg);
+  background: var(--field);
   border: 1.5px solid var(--border);
   border-radius: var(--radius-sm);
   color: var(--ink);
@@ -970,6 +971,9 @@ input[type="date"].form-input { color: var(--ink); font-family: inherit; }
 .k-cats .k-btn.sm{padding:9px 8px}
 .k-cats .k-dt{width:92px;font-size:11px}
 .k-cats.tight{gap:4px}.k-cats.tight .k-btn{padding:9px 3px;font-size:11px}.k-cats.tight .k-lbl{padding:6px 7px;font-size:11px}
+/* kolom isian terlihat di latar putih */
+.form-input{background:#fff2cc;border:1.5px solid #8faadc}
+.form-input:focus{border-color:#121411;background:#fff}
 /* ===== SKALA HP ===== */
 html.zm .app-container{zoom:var(--z)}
 html.zm body{padding-bottom:calc(92px * var(--z))}
@@ -986,7 +990,7 @@ html.zm .modal-content{zoom:var(--z);max-width:none;max-height:calc(var(--appH) 
 .auth-sub{text-align:center;color:var(--ink-muted);font-weight:600;font-size:11px;margin-bottom:12px}
 .auth-card .form-group{margin-bottom:8px}
 .auth-card .form-label{font-size:11px;margin-bottom:4px}
-.auth-card .form-input{padding:8px 12px;font-size:16px;border-radius:var(--radius-sm)}
+.auth-card .form-input{background:#fff2cc;border:1.5px solid #8faadc;padding:8px 12px;font-size:16px;border-radius:var(--radius-sm)}
 .auth-card .btn-lime{padding:10px;font-size:14px;border-radius:var(--radius-sm);margin-bottom:4px}
 .auth-err{color:#d93a3a;font-weight:700;font-size:11px;text-align:center;min-height:14px;margin-bottom:6px}
 .auth-switch{width:100%;padding:6px;color:var(--ink-muted);font-weight:600;font-size:12px}
@@ -1017,6 +1021,33 @@ html.zm .modal-content{zoom:var(--z);max-width:none;max-height:calc(var(--appH) 
 <div id="printarea" style="display:none"></div>
 <div id="auth" hidden></div>
 
+<script type="module">
+/* Firebase: Auth (email/password) + Firestore. Aplikasi tetap jalan offline lewat IndexedDB. */
+(async()=>{
+  try{
+    const V='13.4.0',B='https://www.gstatic.com/firebasejs/'+V+'/';
+    const [A,U,D]=await Promise.all([import(B+'firebase-app.js'),import(B+'firebase-auth.js'),import(B+'firebase-firestore.js')]);
+    const app=A.initializeApp({
+      apiKey:"AIzaSyBzopCMk24KMnvcH2vtDXaZ9D_XuTE2pbU",authDomain:"kasirku-760b5.firebaseapp.com",projectId:"kasirku-760b5",
+      storageBucket:"kasirku-760b5.firebasestorage.app",messagingSenderId:"114192084774",appId:"1:114192084774:web:fd3efe0548d47d0f865be7",measurementId:"G-4KN5CK3ED4"
+    });
+    const auth=U.getAuth(app),db=D.getFirestore(app),mail=u=>u+'@kasirku.app';
+    let ok;const authReady=new Promise(r=>ok=r);U.onAuthStateChanged(auth,()=>ok());
+    window.FB={
+      mail,authReady:()=>authReady,
+      uid:()=>auth.currentUser?auth.currentUser.uid:null,
+      email:()=>auth.currentUser?auth.currentUser.email:null,
+      signIn:async(u,p)=>(await U.signInWithEmailAndPassword(auth,mail(u),p)).user.uid,
+      signUp:async(u,p)=>(await U.createUserWithEmailAndPassword(auth,mail(u),p)).user.uid,
+      signOut:()=>U.signOut(auth),
+      get:async path=>{const s=await D.getDoc(D.doc(db,...path));return s.exists()?s.data():null},
+      set:(path,data)=>D.setDoc(D.doc(db,...path),data),
+      del:path=>D.deleteDoc(D.doc(db,...path))
+    };
+    try{const AN=await import(B+'firebase-analytics.js');if(await AN.isSupported())AN.getAnalytics(app)}catch(e){console.warn('Analytics tidak aktif:',e)}
+  }catch(e){console.warn('Firebase tidak tersedia:',e);if(!window.FB)window.FB=null}
+})();
+</script>
 <script>
 const K='kasir-rempah-v4';
 const NOMORS = Array.from({length:12},(_,i)=>String(i+1).padStart(2,'0'));
@@ -1093,7 +1124,122 @@ function normalizeS(){
 }
 
 /* Simpan otomatis ke IndexedDB (dipanggil di semua tempat yang dulu menulis ke localStorage) */
-const save=()=>{if(!USER)return;dbPut('data',{username:USER.username,state:S,updatedAt:Date.now()}).catch(()=>toast('Gagal menyimpan ke IndexedDB'))};
+const save=()=>{if(!USER)return;dbPut('data',{username:USER.username,state:S,updatedAt:Date.now()}).catch(()=>toast('Gagal menyimpan ke IndexedDB'));cloudSoon()};
+
+
+/* ===== CLOUD (Firebase): data dipisah per hari ===== */
+const CL={on:false,busy:false,again:false,timer:0,cache:{},seeded:false,status:'Belum terhubung ke cloud'};
+const clTime=()=>new Date().toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit'});
+const fbOK=()=>!!(window.FB&&navigator.onLine);
+function cloudOff(){clearTimeout(CL.timer);Object.assign(CL,{on:false,busy:false,cache:{},seeded:false,status:'Belum terhubung ke cloud'});if(window.FB&&FB.signOut)FB.signOut().catch(()=>{})}
+function splitState(){
+  const days={},months={};
+  S.trx.forEach(t=>{(days[dkey(t.ts)]=days[dkey(t.ts)]||[]).push(t)});
+  S.kas.forEach(k=>{(months[dkey(k.ts).slice(0,7)]=months[dkey(k.ts).slice(0,7)]||[]).push(k)});
+  const {trx,kas,cloudAt,...rest}=S;
+  return {main:{...rest,dayKeys:Object.keys(days),kasKeys:Object.keys(months)},days,months};
+}
+const markSynced=()=>{S.cloudAt=Date.now();dbPut('data',{username:USER.username,state:S,updatedAt:Date.now()}).catch(()=>{})};
+const cloudSoon=()=>{if(!CL.on)return;clearTimeout(CL.timer);CL.timer=setTimeout(()=>cloudPush(),2500)};
+async function cloudPush(){
+  if(!CL.on||!USER||!window.FB||!FB.uid())return;
+  if(!navigator.onLine){CL.status='Offline — akan disinkronkan saat online';return}
+  if(CL.busy){CL.again=true;return}
+  CL.busy=true;
+  try{
+    const u=FB.uid(),sp=splitState(),jobs=[];
+    if(!CL.seeded){ /* kenali dokumen yang sudah ada di cloud agar hari yang dihapus ikut terhapus */
+      const m=await FB.get(['accounts',u]);
+      if(m&&m.state){(m.state.dayKeys||[]).forEach(k=>CL.cache['d'+k]=CL.cache['d'+k]||'');(m.state.kasKeys||[]).forEach(k=>CL.cache['k'+k]=CL.cache['k'+k]||'')}
+      CL.seeded=true;
+    }
+    const put=(key,path,data)=>{const j=JSON.stringify(data);if(CL.cache[key]!==j)jobs.push(FB.set(path,JSON.parse(j)).then(()=>{CL.cache[key]=j}))};
+    put('main',['accounts',u],{state:sp.main,updatedAt:Date.now()});
+    Object.entries(sp.days).forEach(([k,v])=>put('d'+k,['accounts',u,'days',k],{trx:v}));
+    Object.entries(sp.months).forEach(([k,v])=>put('k'+k,['accounts',u,'kas',k],{kas:v}));
+    Object.keys(CL.cache).forEach(key=>{
+      if(key==='main')return;const k=key.slice(1);
+      if(key[0]==='d'&&!sp.days[k])jobs.push(FB.del(['accounts',u,'days',k]).then(()=>delete CL.cache[key]));
+      if(key[0]==='k'&&!sp.months[k])jobs.push(FB.del(['accounts',u,'kas',k]).then(()=>delete CL.cache[key]));
+    });
+    await Promise.all(jobs);
+    markSynced();CL.status='Tersinkron ✓ '+clTime();
+  }catch(e){CL.status=clErr(e)}
+  CL.busy=false;if(CL.again){CL.again=false;cloudSoon()}
+}
+const clErr=e=>/permission-denied/.test(e&&e.code||'')?'Aturan Firestore belum diatur (permission-denied)':'Gagal sinkron: '+((e&&(e.code||e.message))||'');
+async function cloudFetchState(){
+  const u=FB.uid(),m=await FB.get(['accounts',u]);
+  if(!m||!m.state)return null;
+  const st=m.state,trx=[],kas=[];
+  await Promise.all([
+    ...(st.dayKeys||[]).map(async k=>{const d=await FB.get(['accounts',u,'days',k]);if(d&&d.trx)trx.push(...d.trx)}),
+    ...(st.kasKeys||[]).map(async k=>{const d=await FB.get(['accounts',u,'kas',k]);if(d&&d.kas)kas.push(...d.kas)})
+  ]);
+  const {dayKeys,kasKeys,...rest}=st;
+  return {...rest,trx,kas};
+}
+async function cloudApply(st){
+  S=st;normalizeS();
+  const sp=splitState();CL.cache={main:JSON.stringify({state:sp.main,updatedAt:0})};
+  Object.entries(sp.days).forEach(([k,v])=>CL.cache['d'+k]=JSON.stringify({trx:v}));
+  Object.entries(sp.months).forEach(([k,v])=>CL.cache['k'+k]=JSON.stringify({kas:v}));
+  CL.seeded=true;markSynced();render();
+}
+async function cloudReconcile(){
+  const st=await cloudFetchState();
+  if(st&&!S.cloudAt&&confirm('Data cloud ditemukan untuk akun ini.\n\nOK = ambil dari cloud (mengganti data di perangkat ini)\nBatal = timpa cloud dengan data perangkat ini')){
+    await cloudApply(st);CL.status='Tersinkron ✓ '+clTime();toast('Data diambil dari cloud');return;
+  }
+  await cloudPush();
+}
+async function cloudLogin(u,p){
+  if(!fbOK()){CL.status=window.FB?'Offline — cloud aktif saat online':'Firebase belum termuat';return}
+  try{
+    try{await FB.signIn(u,p)}
+    catch(e){
+      if(/user-not-found|invalid-credential|invalid-login/.test(e.code||''))await FB.signUp(u,p);
+      else throw e;
+    }
+    CL.on=true;await cloudReconcile();
+  }catch(e){
+    const c=(e&&e.code)||'';
+    CL.status=/email-already-in-use/.test(c)?'Username ini sudah dipakai akun cloud lain / password beda':/operation-not-allowed|configuration-not-found/.test(c)?'Aktifkan Authentication (Email/Password) di Firebase':clErr(e);
+  }
+  if(tab==='atur')pAtur();
+}
+async function cloudResume(){
+  for(let i=0;i<20&&window.FB===undefined;i++)await new Promise(r=>setTimeout(r,500));
+  if(!window.FB){CL.status='Firebase belum termuat';return}
+  try{
+    await FB.authReady();
+    if(FB.uid()&&USER&&FB.email()===FB.mail(USER.username)){CL.on=true;CL.status='Terhubung — menunggu perubahan';cloudSoon()}
+    else CL.status='Masuk ulang (logout lalu login) untuk mengaktifkan cloud';
+  }catch(e){CL.status=clErr(e)}
+}
+async function cloudRestoreLogin(u,p){ /* login di perangkat baru: akun belum ada lokal, ambil dari cloud */
+  if(!fbOK())return false;
+  try{
+    await FB.signIn(u,p);
+    const st=await cloudFetchState();
+    if(!st){await FB.signOut();return false}
+    const salt=rnd(16),algo=(window.crypto&&crypto.subtle)?'pbkdf2':'simple';
+    await dbPut('users',{username:u,nama:(st.cfg&&st.cfg.nama)||'Kasir',salt,algo,hash:await hashPw(p,salt,algo),createdAt:Date.now()});
+    await dbPut('data',{username:u,state:{...st,cloudAt:Date.now()},updatedAt:Date.now()});
+    await startSession(u);CL.on=true;await cloudApply(S);CL.status='Tersinkron ✓ '+clTime();toast('Akun dipulihkan dari cloud');
+    return true;
+  }catch(e){try{await FB.signOut()}catch(_){}return false}
+}
+function cloudNow(){
+  if(!CL.on)return toast('Cloud belum terhubung. Logout lalu login ulang saat online.');
+  CL.seeded=false;cloudPush().then(()=>{if(tab==='atur')pAtur()});toast('Menyinkronkan…');
+}
+async function cloudPullBtn(){
+  if(!CL.on)return toast('Cloud belum terhubung.');
+  if(!confirm('Ambil data dari cloud? Data di perangkat ini akan DIGANTI dengan data cloud.'))return;
+  try{const st=await cloudFetchState();if(!st)return toast('Belum ada data di cloud');await cloudApply(st);CL.status='Tersinkron ✓ '+clTime();toast('Data diambil dari cloud');pAtur()}
+  catch(e){CL.status=clErr(e);toast(CL.status)}
+}
 
 /* ===== AUTH ===== */
 const toHex=b=>Array.from(new Uint8Array(b),x=>x.toString(16).padStart(2,'0')).join('');
@@ -1147,11 +1293,12 @@ async function submitAuth(){
         try{const old=JSON.parse(localStorage.getItem(K));if(old&&old.menu){st=old;toast('Data lama dipindahkan ke akun ini')}}catch(e){}
       }
       await dbPut('data',{username:u,state:st,updatedAt:Date.now()});
-      await startSession(u);
+      await startSession(u);cloudLogin(u,p);
     }else{
       const rec=await dbGet('users',u);
-      if(!rec||await hashPw(p,rec.salt,rec.algo)!==rec.hash) return err('Username atau password salah.');
-      await startSession(u);
+      if(!rec){if(await cloudRestoreLogin(u,p))return;return err('Username atau password salah.')}
+      if(await hashPw(p,rec.salt,rec.algo)!==rec.hash) return err('Username atau password salah.');
+      await startSession(u);cloudLogin(u,p);
     }
   }catch(e){err('Gagal: '+e.message)}
   finally{btn.disabled=false}
@@ -1163,11 +1310,12 @@ async function startSession(u){
   await dbPut('meta',{key:'session',username:u});
   lvl=0;tab='kasir';cat='Semua';cart=[];meja='';search='';
   $('auth').hidden=true;$('auth').innerHTML='';
-  render();
+  render();cloudResume();
 }
 async function logout(){
   if(!confirm('Keluar dari akun?'))return;
   await dbDel('meta','session');
+  cloudOff();
   USER=null;S=DEF();closeM();authView('login');
 }
 const $=i=>document.getElementById(String(i).replace(/^#/,'')),nf=n=>(+n||0).toLocaleString('id-ID'),rp=n=>'Rp '+nf(n);
@@ -1257,7 +1405,7 @@ function pKasir(){
     <div id="k-cart">${kCart()}</div>
     <div id="k-sum">${kSum()}</div>
     <div class="k-lbl yl" style="margin-top:20px">Riwayat Transaksi &amp; Tombol Bayar</div>
-    <div class="k-hist">${kHist()}</div>`;
+    ${kHistBar()}<div class="k-hist">${kHist()}</div>`;
 }
 function setCat(i){cat=kCats()[i];pKasir()}
 function kMenu(){
@@ -1336,13 +1484,53 @@ function doSave(paid){
 }
 
 /* Riwayat + Update Bayar */
-function kHist(){
-  const L=[...S.trx].sort((a,b)=>b.ts-a.ts).slice(0,30);
-  if(!L.length) return `<div class="k-empty">Belum ada transaksi</div>`;
+let histDay='';
+const todayKey=()=>dkey(Date.now()),histKey=()=>histDay||todayKey();
+function setHist(v){histDay=v&&v!==todayKey()?v:'';pKasir()}
+const offDay=n=>{const d=new Date();d.setDate(d.getDate()+n);return dkey(d)};
+function kHistBar(){
+  const hk=histKey(),L=S.trx.filter(t=>dkey(t.ts)===hk),lunas=L.filter(t=>t.paid).reduce((a,t)=>a+t.total,0);
+  const dayBtn=(k,l)=>`<button class="k-btn ${hk===k?'on':''}" onclick="setHist('${k}')">${l}</button>`;
+  const dn=DAY_NAMES[new Date(hk+'T00:00:00').getDay()];
+  return `<div class="k-cats tight">${dayBtn(offDay(-1),'Kemarin')}${dayBtn(todayKey(),'Hari ini')}${dayBtn(offDay(1),'Besok')}</div>
+    <div class="k-cats"><input type="date" class="k-dt" style="width:120px!important" value="${hk}" onchange="setHist(this.value)">
+    <button class="k-btn alt" style="margin-left:0" onclick="delDay()">Hapus data tanggal ini</button></div>
+    <div class="k-note" style="margin:0 0 10px">${dn}, ${fD(hk)}: <b>${L.length}</b> transaksi · lunas <b>${rp(lunas)}</b>${L.some(t=>!t.paid)?' · ada yang belum bayar':''}</div>`;
+}
+function histTable(L){
   return `<table class="k-tbl"><thead><tr><th>TGL &amp; Jam</th><th>ID trx</th><th>pcs</th><th>Pesanan</th><th>Meja/Catatan</th><th>Harga</th><th>Total</th><th>Status Pembayaran</th></tr></thead>`+
   L.map(t=>{const n=t.items.length,rs=`rowspan="${n}"`;
-    return t.items.map((l,i)=>`<tr class="${i?'':'g'}">${i?'':`<td ${rs}>${fmtTgl(t.ts)}</td><td ${rs}>${esc(t.id)}</td>`}<td>${l.qty}</td><td>${esc(l.nama)}${l.note?` <small>(${esc(l.note)})</small>`:''}</td>${i?'':`<td ${rs}>${esc(t.nama)}</td>`}<td>${nf(l.harga)}</td>${i?'':`<td ${rs}>${nf(t.total)}</td><td ${rs}>${t.paid?`<span class="k-st ok">Sudah bayar</span>`+`<button class="k-upd" style="background:#deebf7" onclick="reprint('${t.id}')">Cetak</button>`:`<span class="k-st no">Blm bayar</span><button class="k-upd red" onclick="updModal('${t.id}')">Update Bayar</button>`}</td>`}</tr>`).join('');
+    const act=`<button class="k-upd" style="background:#fff;color:#c00;border:1px solid #c00" onclick="delTrx('${t.id}')">Hapus</button>`;
+    return t.items.map((l,i)=>`<tr class="${i?'':'g'}">${i?'':`<td ${rs}>${fmtTgl(t.ts)}</td><td ${rs}>${esc(t.id)}</td>`}<td>${l.qty}</td><td>${esc(l.nama)}${l.note?` <small>(${esc(l.note)})</small>`:''}</td>${i?'':`<td ${rs}>${esc(t.nama)}</td>`}<td>${nf(l.harga)}</td>${i?'':`<td ${rs}>${nf(t.total)}</td><td ${rs}>${t.paid?`<span class="k-st ok">Sudah bayar</span><button class="k-upd" style="background:#deebf7" onclick="reprint('${t.id}')">Cetak</button>`:`<span class="k-st no">Blm bayar</span><button class="k-upd red" onclick="updModal('${t.id}')">Update Bayar</button>`}${act}</td>`}</tr>`).join('');
   }).join('')+`</table>`;
+}
+function kHist(){
+  const hk=histKey(),tk=todayKey();
+  const L=S.trx.filter(t=>dkey(t.ts)===hk).sort((a,b)=>b.ts-a.ts);
+  const carry=hk===tk?S.trx.filter(t=>!t.paid&&dkey(t.ts)<tk).sort((a,b)=>b.ts-a.ts):[];
+  return (L.length?histTable(L):`<div class="k-empty">Belum ada transaksi pada ${hk===tk?'hari ini':fD(hk)}</div>`)+
+    (carry.length?`<div class="k-lbl yl" style="margin:14px 0 8px">Belum bayar dari hari sebelumnya (${carry.length})</div>`+histTable(carry):'');
+}
+function dropSalesKas(keys){S.kas=S.kas.filter(k=>!(k.src&&keys.some(x=>k.src==='sales:'+x)))}
+function delTrx(id){
+  const t=S.trx.find(x=>x.id==id);if(!t)return;
+  need(2,()=>{if(!confirm(`Hapus transaksi #${t.id} (${rp(t.total)}) dari ${t.nama}?`))return;
+    S.trx=S.trx.filter(x=>x.id!=id);save();pKasir();toast('Transaksi dihapus')});
+}
+function delDay(k){
+  k=k||histKey();const n=S.trx.filter(t=>dkey(t.ts)===k).length;
+  if(!n)return toast('Tidak ada data pada tanggal ini');
+  need(2,()=>{if(!confirm(`Hapus SEMUA data ${n} transaksi tanggal ${fD(k)}? Tidak bisa dibatalkan.`))return;
+    S.trx=S.trx.filter(t=>dkey(t.ts)!==k);dropSalesKas([k]);save();tab==='laporan'?pLaporan():pKasir();toast('Data tanggal itu dihapus')});
+}
+function delRange(){
+  const a=$('del-from').value,b=$('del-to').value||a;
+  if(!a)return toast('Pilih tanggal awal');
+  const [s,e]=a<=b?[a,b]:[b,a],keys=dayKeys(s,e);
+  const n=S.trx.filter(t=>{const k=dkey(t.ts);return k>=s&&k<=e}).length;
+  if(!n)return toast('Tidak ada transaksi pada rentang itu');
+  if(!confirm(`Hapus ${n} transaksi dari ${fD(s)} sampai ${fD(e)}? Tidak bisa dibatalkan.`))return;
+  S.trx=S.trx.filter(t=>{const k=dkey(t.ts);return k<s||k>e});dropSalesKas(keys);save();toast(n+' transaksi dihapus');
 }
 function updModal(id,keep){
   const t=S.trx.find(x=>x.id==id); if(!t)return;
@@ -1834,7 +2022,28 @@ function dashHTML(){
   return row2('Total Penjualan (Periode dipilih)',rp(d.total))+row2('Jumlah Transaksi (Periode dipilih)',d.n)+row2('Rata-Rata Penjualan per hari',rp(d.avgDay))+row2('Jumlah hari kerja aktif (terjadi omset)',d.days)+
     row2('Est. Jumlah Pembeli',d.buyers)+row2('Est. Rata-Rata belanja per pembeli',rp(d.avgBuyer))+
     `<div class="k-lbl" style="margin-top:8px">Total Produk Terjual By Kategori</div>`+
-    Object.entries(d.cats).map(([c,v])=>`<div class="k-box"><div class="k-row"><span>${esc(c)}</span><span>${v.pcs} Pcs</span><b>${rp(v.rp)}</b></div></div>`).join('');
+    Object.entries(d.cats).map(([c,v])=>`<div class="k-box"><div class="k-row"><span>${esc(c)}</span><span>${v.pcs} Pcs</span><b>${rp(v.rp)}</b></div></div>`).join('')+dayListHTML();
+}
+function dayListHTML(){
+  const r=perRange(),m={};
+  S.trx.forEach(t=>{const k=dkey(t.ts);if(!inR(k,r))return;const o=m[k]=m[k]||{n:0,rp:0,bb:0};o.n++;if(t.paid)o.rp+=t.total;else o.bb++});
+  const ks=Object.keys(m).sort().reverse(),tk=todayKey();
+  return `<div class="k-lbl" style="margin-top:8px">Data per Hari (terpisah per tanggal)</div>`+
+    (ks.length?ks.map(k=>{const o=m[k],dn=DAY_SHORT[new Date(k+'T00:00:00').getDay()];
+      return `<div class="k-box"><div class="k-row"><span><b>${dn} ${fD(k)}</b>${k===tk?' · hari ini':''}</span><b>${rp(o.rp)}</b></div>
+        <div class="k-row" style="font-weight:600"><span>${o.n} transaksi${o.bb?` · ${o.bb} belum bayar`:''}</span>
+        <span class="k-seg"><button onclick="viewDay('${k}')">Lihat</button><button style="color:#c00;border-color:#c00" onclick="delDay('${k}')">Hapus</button></span></div></div>`}).join('')+
+      `<button class="btn-solid" style="background:#fee2e2;color:#991b1b;border-color:#fca5a5;margin:8px 0" onclick="delPeriod()">Hapus Semua Data Periode Ini</button>`
+    :`<div class="k-empty">Tidak ada data pada periode ini</div>`)+
+    `<div class="k-note">Cloud: <b>${esc(CL.status)}</b> · menghapus data juga menghapus dokumen hari itu di Firebase.</div>`;
+}
+function viewDay(k){histDay=k!==todayKey()?k:'';tab='kasir';render()}
+function delPeriod(){
+  const r=perRange(),L=S.trx.filter(t=>inR(dkey(t.ts),r));
+  if(!L.length)return toast('Tidak ada transaksi pada periode ini');
+  const keys=[...new Set(L.map(t=>dkey(t.ts)))];
+  need(2,()=>{if(!confirm(`Hapus ${L.length} transaksi (${perLabel()})? Tidak bisa dibatalkan.`))return;
+    S.trx=S.trx.filter(t=>!inR(dkey(t.ts),r));dropSalesKas(keys);save();pLaporan();toast(L.length+' transaksi dihapus')});
 }
 function salesGroups(){
   return lpTrx().sort((a,b)=>(a.pts||a.ts)-(b.pts||b.ts)).map(t=>({t,items:t.items.filter(l=>lp.cat==='Semua'||l.kat===lp.cat)})).filter(g=>g.items.length);
@@ -1976,7 +2185,14 @@ function pAtur(){
       fg('Cetak struk otomatis saat menyimpan pesanan',sel('s-autoPrint',c.autoPrint,[['ya','Ya'],['tidak','Tidak']])))}
     ${sec(5,'Pengaturan Lain yang Penting',
       fg('Tanggal mulai periode bulanan laporan (1–28)',`<input id="s-bd" class="form-input" inputmode="numeric" value="${esc(c.bd)}">`)+
+      `<div class="form-group"><label class="form-label">Hapus transaksi per tanggal (dari – sampai)</label><div class="k-fl"><input id="del-from" type="date" class="form-input"><input id="del-to" type="date" class="form-input"></div></div>
+       <button class="btn-solid" style="background:#fee2e2;color:#991b1b;border-color:#fca5a5;margin-bottom:10px" onclick="delRange()">Hapus Transaksi pada Rentang Ini</button>`+
       `<button class="btn-solid" style="background:#fee2e2;color:#991b1b;border-color:#fca5a5" onclick="if(confirm('Hapus semua transaksi & buku kas akun ini?')){S.trx=[];S.kas=[];save();render();toast('Data dihapus')}">Reset Transaksi &amp; Kas</button>`)}
+    ${sec(6,'Cloud (Firebase)',
+      `<div class="k-note" style="margin-top:0">Status: <b>${esc(CL.status)}</b>${S.cloudAt?'<br>Terakhir sinkron: '+fDT(S.cloudAt):''}</div>
+       <div class="k-note" style="margin-top:0">Data tersimpan di perangkat dan, saat online, diunggah ke cloud <b>per hari</b> (satu dokumen per tanggal). Gunakan satu perangkat utama untuk input.</div>
+       <button class="btn-lime" style="margin-bottom:10px" onclick="cloudNow()">Sinkronkan Sekarang</button>
+       <button class="btn-solid" onclick="cloudPullBtn()">Ambil Data dari Cloud</button>`)}
     <button class="k-go" style="margin-top:12px" onclick="saveAtur()">Simpan Pengaturan</button>`;
 }
 function saveAtur(){
