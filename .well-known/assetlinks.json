@@ -1,8 +1,22 @@
-[{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "io.github.whitecat_12.twa",
-        "sha256_cert_fingerprints": ["23:55:CE:45:92:16:75:12:5B:09:3E:C2:83:D6:B0:13:34:A7:B8:69:95:47:A4:14:D7:2C:19:DC:89:3B:FC:83"]
-      }
-    }]
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "io.github.whitecat_12.twa",
+      "sha256_cert_fingerprints": [
+        "23:55:CE:45:92:16:75:12:5B:09:3E:C2:83:D6:B0:13:34:A7:B8:69:95:47:A4:14:D7:2C:19:DC:89:3B:FC:83"
+      ]
+    }
+  },
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "id.kopdesku.kemiri",
+      "sha256_cert_fingerprints": [
+        "F9:83:6A:42:0D:2C:0D:05:29:15:0F:50:F8:F8:57:5C:4E:5E:A6:AC:59:20:83:23:75:0C:98:CB:57:32:4F:EB"
+      ]
+    }
+  }
+]
